@@ -1,2 +1,0 @@
-
-$route['product_stock_management'] = 'product_stock_management/index';

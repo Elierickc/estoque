@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    margin-top: 30px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.table {
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,48 @@
+/* Estilos para a página adicionar_servico.php */
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container-fluid {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
