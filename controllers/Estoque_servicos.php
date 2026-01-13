@@ -7,22 +7,17 @@ class Estoque_servicos extends Admin_controller
     {
         parent::__construct();
         $this->load->model('estoque_servicos_model');
+        $this->load->add_package_path(module_dir_path('estoque_servicos'));
     }
 
     public function index()
     {
         // Buscar dados dos serviços do banco de dados
         $data['servicos'] = $this->estoque_servicos_model->get_servicos();
-    
-        // Carregue a view do relatório de disponibilidade
-        $data['title'] = _l('estoque_servicos');
-        $this->load->view('admin/estoque_servicos/relatorio', $data);
-         // Buscar dados dos serviços do banco de dados
-    $data['servicos'] = $this->estoque_servicos_model->get_servicos();
 
-    // Carregue a view da lista de serviços
-    $data['title'] = _l('estoque_servicos');
-    $this->load->view('admin/estoque_servicos/index', $data);
+        // Carregue a view da lista de serviços
+        $data['title'] = _l('estoque_servicos');
+        $this->load->view('estoque_servicos/index', $data);
     }
   
 }
@@ -45,7 +40,7 @@ class Estoque_servicos extends Admin_controller
             redirect(admin_url('estoque_servicos'));
         } else {
             $data['title'] = _l('adicionar_servico');
-            $this->load->view('admin/estoque_servicos/adicionar_servico', $data);
+            $this->load->view('estoque_servicos/adicionar_servico', $data);
         }
     }
     
@@ -64,7 +59,7 @@ public function editar_servico($id)
     } else {
         $data['servico'] = $this->estoque_servicos_model->get($id);
         $data['title'] = _l('editar_servico');
-        $this->load->view('admin/estoque_servicos/editar_servico', $data);
+        $this->load->view('estoque_servicos/editar_servico', $data);
     }
 }
 
@@ -85,7 +80,7 @@ public function categorias()
 
     $data['categorias'] = $this->estoque_servicos_model->get_all_categorias($filtro_nome, $ordenacao); // Passe os parâmetros para o método
 
-    $this->load->view('admin/servico_categorias/categorias', $data);
+    $this->load->view('servico_categorias/categorias', $data);
 }
 
 
