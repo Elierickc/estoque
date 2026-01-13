@@ -8,11 +8,6 @@ class Estoque_servicos_model extends App_Model
         parent::__construct();
         $this->_table = 'estoque_servicos';
         $this->primary_key = 'id';
-          // Carregar as migrations
-    $this->load->library('migration');
-    if (!$this->migration->current()) {
-        show_error($this->migration->error_string());
-    }
     }
     public function get_servicos()
     {

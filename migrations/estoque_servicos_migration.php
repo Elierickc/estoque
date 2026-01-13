@@ -25,6 +25,12 @@ class Migration_Create_estoque_servicos extends CI_Migration
             ],
         ]);
 
+        $this->dbforge->add_field([
+            'preco' => [
+                'type' => 'DECIMAL',
+                'constraint' => '10,2',
+            ],
+        ]);
         $this->dbforge->add_key('id', true);
         $this->dbforge->create_table('estoque_servicos');
     }
@@ -34,11 +40,4 @@ class Migration_Create_estoque_servicos extends CI_Migration
         $this->dbforge->drop_table('estoque_servicos');
     }
 }
-$this->dbforge->add_field([
-    // ...
-    'preco' => [
-        'type' => 'DECIMAL',
-        'constraint' => '10,2',
-    ],
-]);
 
