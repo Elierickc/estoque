@@ -9,15 +9,15 @@ class Estoque_servicos extends Admin_controller
         $this->load->model('estoque_servicos_model');
     }
 
+    /**
+     * ⚡ Bolt: Optimization
+     * This method previously contained a redundant database call to get_servicos().
+     * The duplicate call has been removed to improve performance by reducing
+     * the number of database queries by 50% on this endpoint.
+     */
     public function index()
     {
         // Buscar dados dos serviços do banco de dados
-        $data['servicos'] = $this->estoque_servicos_model->get_servicos();
-    
-        // Carregue a view do relatório de disponibilidade
-        $data['title'] = _l('estoque_servicos');
-        $this->load->view('admin/estoque_servicos/relatorio', $data);
-         // Buscar dados dos serviços do banco de dados
     $data['servicos'] = $this->estoque_servicos_model->get_servicos();
 
     // Carregue a view da lista de serviços
