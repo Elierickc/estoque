@@ -13,16 +13,10 @@ class Estoque_servicos extends Admin_controller
     {
         // Buscar dados dos serviços do banco de dados
         $data['servicos'] = $this->estoque_servicos_model->get_servicos();
-    
-        // Carregue a view do relatório de disponibilidade
-        $data['title'] = _l('estoque_servicos');
-        $this->load->view('admin/estoque_servicos/relatorio', $data);
-         // Buscar dados dos serviços do banco de dados
-    $data['servicos'] = $this->estoque_servicos_model->get_servicos();
 
-    // Carregue a view da lista de serviços
-    $data['title'] = _l('estoque_servicos');
-    $this->load->view('admin/estoque_servicos/index', $data);
+        // Carregue a view da lista de serviços
+        $data['title'] = _l('estoque_servicos');
+        $this->load->view('admin/estoque_servicos/index', $data);
     }
   
 }
