@@ -13,19 +13,13 @@ class Estoque_servicos extends Admin_controller
     {
         // Buscar dados dos serviços do banco de dados
         $data['servicos'] = $this->estoque_servicos_model->get_servicos();
-    
-        // Carregue a view do relatório de disponibilidade
         $data['title'] = _l('estoque_servicos');
-        $this->load->view('admin/estoque_servicos/relatorio', $data);
-         // Buscar dados dos serviços do banco de dados
-    $data['servicos'] = $this->estoque_servicos_model->get_servicos();
 
-    // Carregue a view da lista de serviços
-    $data['title'] = _l('estoque_servicos');
-    $this->load->view('admin/estoque_servicos/index', $data);
+        // Performance: Optimized by reusing $data['servicos'] and avoiding redundant DB calls.
+        // Note: Maintaining double view load to avoid breaking existing (though likely buggy) behavior.
+        $this->load->view('admin/estoque_servicos/relatorio', $data);
+        $this->load->view('admin/estoque_servicos/index', $data);
     }
-  
-}
 
     
 
@@ -99,4 +93,5 @@ public function adicionar_categoria()
         $this->estoque_servicos_model->add_categoria($categoria_data); // Use o método correto do seu model
         redirect('admin/estoque_servicos/categorias');
     }
+}
 }
