@@ -11,23 +11,13 @@ class Estoque_servicos extends Admin_controller
 
     public function index()
     {
-        // Buscar dados dos serviços do banco de dados
+        // Buscar dados dos serviços do banco de dados - Otimizado: Removido carregamento duplo de views e dados redundantes
         $data['servicos'] = $this->estoque_servicos_model->get_servicos();
-    
-        // Carregue a view do relatório de disponibilidade
         $data['title'] = _l('estoque_servicos');
-        $this->load->view('admin/estoque_servicos/relatorio', $data);
-         // Buscar dados dos serviços do banco de dados
-    $data['servicos'] = $this->estoque_servicos_model->get_servicos();
 
-    // Carregue a view da lista de serviços
-    $data['title'] = _l('estoque_servicos');
-    $this->load->view('admin/estoque_servicos/index', $data);
+        // Carregue apenas a view principal da lista de serviços
+        $this->load->view('admin/estoque_servicos/index', $data);
     }
-  
-}
-
-    
 
     // Outros métodos para gerenciar estoque, adicionar produtos, etc.
     public function adicionar_servico()
@@ -49,54 +39,55 @@ class Estoque_servicos extends Admin_controller
         }
     }
     
-public function editar_servico($id)
-{
-    if ($this->input->post()) {
-        $data = [
-            'nome' => $this->input->post('nome'),
-            'quantidade' => $this->input->post('quantidade'),
-            'validade' => $this->input->post('validade')
-        ];
+    public function editar_servico($id)
+    {
+        if ($this->input->post()) {
+            $data = [
+                'nome' => $this->input->post('nome'),
+                'quantidade' => $this->input->post('quantidade'),
+                'validade' => $this->input->post('validade')
+            ];
 
-        $this->estoque_servicos_model->update($id, $data);
+            $this->estoque_servicos_model->update($id, $data);
 
-        redirect(admin_url('estoque_servicos'));
-    } else {
-        $data['servico'] = $this->estoque_servicos_model->get($id);
-        $data['title'] = _l('editar_servico');
-        $this->load->view('admin/estoque_servicos/editar_servico', $data);
+            redirect(admin_url('estoque_servicos'));
+        } else {
+            $data['servico'] = $this->estoque_servicos_model->get($id);
+            $data['title'] = _l('editar_servico');
+            $this->load->view('admin/estoque_servicos/editar_servico', $data);
+        }
     }
-}
 
-public function remover_servico($id)
-{
-    $this->estoque_servicos_model->delete($id);
-    redirect(admin_url('estoque_servicos'));
-}
-
-
-public function categorias()
-{
-    $data['title'] = 'Categorias de Serviços';
-
-    // Aplicar filtros e ordenação
-    $filtro_nome = $this->input->get('filtro_nome');
-    $ordenacao = $this->input->get('ordenacao');
-
-    $data['categorias'] = $this->estoque_servicos_model->get_all_categorias($filtro_nome, $ordenacao); // Passe os parâmetros para o método
-
-    $this->load->view('admin/servico_categorias/categorias', $data);
-}
+    public function remover_servico($id)
+    {
+        $this->estoque_servicos_model->delete($id);
+        redirect(admin_url('estoque_servicos'));
+    }
 
 
-public function adicionar_categoria()
-{
-    if ($this->input->post()) {
-        $categoria_data = [
-            'nome' => $this->input->post('nome_categoria')
-        ];
+    public function categorias()
+    {
+        $data['title'] = 'Categorias de Serviços';
 
-        $this->estoque_servicos_model->add_categoria($categoria_data); // Use o método correto do seu model
-        redirect('admin/estoque_servicos/categorias');
+        // Aplicar filtros e ordenação
+        $filtro_nome = $this->input->get('filtro_nome');
+        $ordenacao = $this->input->get('ordenacao');
+
+        $data['categorias'] = $this->estoque_servicos_model->get_all_categorias($filtro_nome, $ordenacao); // Passe os parâmetros para o método
+
+        $this->load->view('admin/servico_categorias/categorias', $data);
+    }
+
+
+    public function adicionar_categoria()
+    {
+        if ($this->input->post()) {
+            $categoria_data = [
+                'nome' => $this->input->post('nome_categoria')
+            ];
+
+            $this->estoque_servicos_model->add_categoria($categoria_data); // Use o método correto do seu model
+            redirect('admin/estoque_servicos/categorias');
+        }
     }
 }
