@@ -1,0 +1,3 @@
+## 2025-02-02 - [Redundant Migration and Controller Logic]
+**Learning:** Found two major performance bottlenecks: 1) Calling `$this->migration->current()` in model constructors causes redundant DB/FS checks on every instantiation. 2) Redundant DB calls and view loads in controller actions (e.g., loading multiple full views in one request). Also, the codebase has a pattern of misplaced closing braces causing syntax errors and methods being left outside of class scope.
+**Action:** Always check constructors for migration logic and controller actions for duplicate work. Use `php -l` to verify class structure and syntax after any modification.
